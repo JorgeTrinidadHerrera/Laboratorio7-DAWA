@@ -22,10 +22,18 @@ namespace Laboratorio7
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void InsertButton_Click(object sender, RoutedEventArgs e)
         {
             ProductBusiness business = new ProductBusiness();
             dgProducts.ItemsSource = business.Get();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductBusiness business = new ProductBusiness();
+
+            business.Insert(new Entity.Product { Name = txtName.Text, Price = Convert.ToDecimal( txtPrice.Text), Stock =  Convert.ToInt32( txtStock.Text)});
+            
         }
     }
 }

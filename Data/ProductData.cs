@@ -13,7 +13,7 @@ namespace Data
     {
 
  
-            string connectionString = "Data Source=LAB1504-31\\SQLEXPRESS;Initial Catalog=FacturaDB; User Id=User01;Password=123456";
+            string connectionString = "Data Source=LAB1504-24\\SQLEXPRESS;Initial Catalog=FacturaDB; User Id=User01;Password=123456";
 
             public List<Product> Get()
             {
@@ -23,7 +23,7 @@ namespace Data
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("USP_ListProduct", connection))
+                    using (SqlCommand command = new SqlCommand("ListarProductos", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -44,8 +44,27 @@ namespace Data
                     }
                 }
             }
+            
+            public void Insert(Product product)
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand("InsertarProductos", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@Name", product.Name);
+                        command.Parameters.AddWithValue("@Price", product.Price);
+                        command.Parameters.AddWithValue("@Stock", product.Stock);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
         
-        public void Insert()
+        public void Insert(string name)
         {
         }
         public void Update()

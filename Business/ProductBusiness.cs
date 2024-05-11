@@ -16,5 +16,14 @@ namespace Business
             var product = data.Get();
             return product;
         }
+
+        public void Insert(Product product)
+        {
+            ProductData data = new ProductData();
+            data.Insert(product);
+        }
     }
+
+    
+
 }
